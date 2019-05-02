@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Welcome from './WelcomeMessage';
 // import styled, {css} from 'styled-components'
 import './App.css';
-
+import AppLayout from './AppLayout';
 
 // const MyButton = styled.button`
 // color: green;
@@ -18,9 +18,9 @@ import './App.css';
 class Index extends Component {
   render() {
     return (
-        <div>
+        <AppLayout>
           <Welcome/>
-        </div>
+        </AppLayout>
     );
   }
 }
