@@ -3,6 +3,7 @@ import Welcome from './WelcomeMessage';
 // import styled, {css} from 'styled-components'
 import './App.css';
 import AppLayout from './AppLayout';
+import AppBar from './AppBar';
 
 // const MyButton = styled.button`
 // color: green;
@@ -19,6 +20,7 @@ class Index extends Component {
   render() {
     return (
         <AppLayout>
+          <AppBar/>
           <Welcome/>
         </AppLayout>
     );
