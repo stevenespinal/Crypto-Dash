@@ -1,7 +1,6 @@
 body {
-    background: black;
+    background-color: #010e2c;
+    color: white;
+    font-family: 'Do Hyeon', sans-serif;
 }
 
-h1 {
-    color: white;
-}
