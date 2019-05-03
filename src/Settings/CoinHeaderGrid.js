@@ -29,7 +29,6 @@ export default function ({name, symbol, topSection}) {
         ) : (
             <CoinSymbol>{symbol}</CoinSymbol>
         )}
-        <CoinSymbol>{symbol}</CoinSymbol>
       </CoinHeaderGridStyled>
   );
 }
