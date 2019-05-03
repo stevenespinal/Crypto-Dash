@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
-import Welcome from './WelcomeMessage';
 import './App.css';
 import AppLayout from './AppLayout';
 import AppBar from './AppBar';
 import AppProvider from './AppProvider';
-
+import Settings from '../Settings';
 
 class Index extends Component {
   render() {
@@ -12,7 +11,7 @@ class Index extends Component {
         <AppLayout>
           <AppProvider>
             <AppBar/>
-            <Welcome/>
+            <Settings/>
           </AppProvider>
         </AppLayout>
     );
