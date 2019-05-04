@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import _ from 'lodash';
+
 const cc = require('cryptocompare');
 
 export const AppContext = React.createContext();
@@ -23,7 +24,7 @@ export default class AppProvider extends Component {
 
   addCoin = key => {
     let favorites = [...this.state.favorites];
-    if(favorites.length < MAX_FAVORITES) {
+    if (favorites.length < MAX_FAVORITES) {
       favorites.push(key);
       this.setState({
         favorites
@@ -41,18 +42,40 @@ export default class AppProvider extends Component {
   isInFavorites = key => _.includes(this.state.favorites, key);
 
   componentDidMount() {
-    this.fetchCoins()
+    this.fetchCoins();
+    this.fetchPrices();
   };
 
-  fetchCoins = async() => {
+  fetchCoins = async () => {
     let coinList = (await cc.coinList()).Data;
     this.setState({coinList});
+  };
+
+  fetchPrices = async () => {
+    if(this.state.firstVisit) return;
+    let prices = await this.prices();
+    this.setState({prices});
+  };
+
+  prices = async () => {
+    let returnData = [];
+    for (let i =0; i<this.state.favorites.length; i++) {
+      try {
+        let priceData = await cc.priceFull(this.state.favorites[i], 'USD');
+        returnData.push(priceData);
+      } catch (e) {
+        console.warn('Fetch price error: ', e);
+      }
+    }
+    return returnData;
   };
 
   confirmFavorites = () => {
     this.setState({
       firstVisit: false,
       page: 'dashboard'
+    }, () => {
+      this.fetchPrices();
     });
     localStorage.setItem('cryptoDash', JSON.stringify({
       favorites: this.state.favorites
