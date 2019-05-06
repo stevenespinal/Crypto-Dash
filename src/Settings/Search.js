@@ -28,7 +28,7 @@ const handleFilter = _.debounce((inputValue, coinList, setFilterCoins) => {
   let coinNames = coinSymbols.map(sym => coinList[sym].CoinName);
   let allStringsToSearch = coinSymbols.concat(coinNames);
   let fuzzyResults = fuzzy.filter(inputValue, allStringsToSearch, {})
-      .map(result => result.string);
+    .map(result => result.string);
   let filteredCoins = _.pickBy(coinList, (result, symKey) => {
     let coinName = result.CoinName;
     return (_.includes(fuzzyResults, symKey) || _.includes(fuzzyResults, coinName));
@@ -48,12 +48,12 @@ function filterCoins(e, setFilteredCoins, coinList) {
 
 export default function () {
   return (
-      <AppContext.Consumer>
-        {({setFilteredCoins, coinList}) =>
-            <SearchGrid>
-              <h2>Search All Coins</h2>
-              <SearchInput onKeyUp={(e) => filterCoins(e, setFilteredCoins, coinList)}/>
-            </SearchGrid>}
-      </AppContext.Consumer>
+    <AppContext.Consumer>
+      {({setFilteredCoins, coinList}) =>
+        <SearchGrid>
+          <h2>Search All Coins</h2>
+          <SearchInput onKeyUp={(e) => filterCoins(e, setFilteredCoins, coinList)}/>
+        </SearchGrid>}
+    </AppContext.Consumer>
   );
 }

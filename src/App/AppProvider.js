@@ -52,14 +52,14 @@ export default class AppProvider extends Component {
   };
 
   fetchPrices = async () => {
-    if(this.state.firstVisit) return;
+    if (this.state.firstVisit) return;
     let prices = await this.prices();
     this.setState({prices});
   };
 
   prices = async () => {
     let returnData = [];
-    for (let i =0; i<this.state.favorites.length; i++) {
+    for (let i = 0; i < this.state.favorites.length; i++) {
       try {
         let priceData = await cc.priceFull(this.state.favorites[i], 'USD');
         returnData.push(priceData);
@@ -97,9 +97,9 @@ export default class AppProvider extends Component {
 
   render() {
     return (
-        <AppContext.Provider value={this.state}>
-          {this.props.children}
-        </AppContext.Provider>
+      <AppContext.Provider value={this.state}>
+        {this.props.children}
+      </AppContext.Provider>
     );
   }
 }

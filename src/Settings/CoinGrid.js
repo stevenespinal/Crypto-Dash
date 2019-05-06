@@ -11,20 +11,22 @@ margin-top: 40px;
 `;
 
 function getLowerSectionCoins(coinList, filteredCoins) {
-  return (filteredCoins && Object.keys(filteredCoins)) || Object.keys(coinList).slice(0,100)
+  return (filteredCoins && Object.keys(filteredCoins)) || Object.keys(coinList).slice(0, 100)
 }
 
 function getCoinsToDisplay(coinList, topSection, favorites, filteredCoins) {
-  return topSection ? favorites: getLowerSectionCoins(coinList, filteredCoins);
+  return topSection ? favorites : getLowerSectionCoins(coinList, filteredCoins);
 }
 
 export default function ({topSection}) {
   return (
-      <AppContext.Consumer>
-        {({coinList, favorites, filteredCoins}) => <CoinGridStyled>
+    <AppContext.Consumer>
+      {({coinList, favorites, filteredCoins}) => (
+        <CoinGridStyled>
           {getCoinsToDisplay(coinList, topSection, favorites, filteredCoins).map(coinKey =>
-              <CoinTile topSection={topSection} coinKey={coinKey}/>)}
-        </CoinGridStyled>}
-      </AppContext.Consumer>
+            <CoinTile key={coinKey} topSection={topSection} coinKey={coinKey}/>)}
+        </CoinGridStyled>
+      )}
+    </AppContext.Consumer>
   );
 }

@@ -7,12 +7,12 @@ import Search from './Search';
 
 export default function () {
   return (
-      <Page name="settings">
-        <WelcomeMessage/>
-        <CoinGrid topSection/>
-        <ConfirmButton/>
-        <Search/>
-        <CoinGrid/>
-      </Page>
+    <Page name="settings">
+      <WelcomeMessage/>
+      <CoinGrid topSection/>
+      <ConfirmButton/>
+      <Search/>
+      <CoinGrid/>
+    </Page>
   )
 };
