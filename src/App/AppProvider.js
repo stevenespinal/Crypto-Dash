@@ -13,6 +13,7 @@ export default class AppProvider extends Component {
     this.state = {
       page: 'dashboard',
       favorites: ['BTC', 'ETH', 'XMR', 'DOGE'],
+      timeInterval: 'months',
       ...this.savedSettings(),
       setPage: this.setPage,
       addCoin: this.addCoin,
@@ -20,7 +21,8 @@ export default class AppProvider extends Component {
       isInFavorites: this.isInFavorites,
       setFilteredCoins: this.setFilteredCoins,
       confirmFavorites: this.confirmFavorites,
-      setCurrentFavorite: this.setCurrentFavorite
+      setCurrentFavorite: this.setCurrentFavorite,
+      changeChartSelect: this.changeChartSelect
     }
   }
 
@@ -67,11 +69,11 @@ export default class AppProvider extends Component {
       {
         name: this.state.currentFavorite,
         data: results.map((ticker, index) => [
-          moment().subtract({months: TIME_UNITS - index}).valueOf(),
+          moment().subtract({[this.state.timeInterval]: TIME_UNITS - index}).valueOf(),
           ticker.USD
         ])
       }
-    ]
+    ];
     this.setState({historical})
   };
 
@@ -96,7 +98,7 @@ export default class AppProvider extends Component {
           this.state.currentFavorite,
           ['USD'],
           moment()
-            .subtract({months: units})
+            .subtract({[this.state.timeInterval]: units})
             .toDate()
         )
       )
@@ -147,6 +149,10 @@ export default class AppProvider extends Component {
 
   setFilteredCoins = (filteredCoins) => this.setState({filteredCoins});
 
+  changeChartSelect = (value) => {
+    console.log(value);
+    this.setState({timeInterval: value, historical: null}, this.fetchHistorical)
+  };
   render() {
     return (
       <AppContext.Provider value={this.state}>
